@@ -1,39 +1,40 @@
-async function searchLyrics() {
-console.log('Search button clicked!');
-const artist = document.getElementById('artist').value.trim();
-const song = document.getElementById('song').value.trim();
-const lyricsContainer = document.getElementById('lyrics-container');
+async function searchMusic() {
+    const query = document.getElementById('search').value.trim();
+    const resultsContainer = document.getElementById('results-container');
 
-    lyricsContainer.innerHTML = '';
+    resultsContainer.innerHTML = ''; // Clear previous results
 
-    if (!artist || !song) {
-        lyricsContainer.innerHTML = '<p>Please enter both artist and song title.</p>';
+    if (!query) {
+        resultsContainer.innerHTML = '<p>Please enter a search term.</p>';
         return;
     }
 
     try {
-        const response = await fetch(`https://api.lyrics.ovh/v1/${encodeURIComponent(artist)}/${encodeURIComponent(song)}`);
-        console.log('API Response:', response);
-
-        if (!response.ok) {
-            throw new Error(`API Error: ${response.status}`);
-        }
-
+        const response = await fetch(`https://api.deezer.com/search?q=${encodeURIComponent(query)}`);
         const data = await response.json();
-        console.log('Parsed Data:', data);
 
-        if (data.lyrics) {
-            lyricsContainer.innerHTML = `
-                <div class="lyrics">
-                    <h3>Lyrics for "${song}" by ${artist}</h3>
-                    <pre>${data.lyrics}</pre>
-                </div>
-            `;
-        } else {
-            lyricsContainer.innerHTML = '<p>Lyrics not found. Please try a different song.</p>';
+        if (data.data.length === 0) {
+            resultsContainer.innerHTML = '<p>No results found. Try a different search.</p>';
+            return;
         }
+
+        data.data.forEach(track => {
+            const trackElement = document.createElement('div');
+            trackElement.innerHTML = `
+                <div>
+                    <img src="${track.album.cover}" alt="Album cover" style="width: 100px; height: 100px; border-radius: 10px;">
+                    <p><strong>${track.title}</strong> by ${track.artist.name}</p>
+                    <audio controls>
+                        <source src="${track.preview}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <hr>
+            `;
+            resultsContainer.appendChild(trackElement);
+        });
     } catch (error) {
-        console.error('Error fetching lyrics:', error);
-        lyricsContainer.innerHTML = '<p>Something went wrong. Please try again later.</p>';
+        console.error('Error fetching music:', error);
+        resultsContainer.innerHTML = '<p>Something went wrong. Please try again later.</p>';
     }
 }
