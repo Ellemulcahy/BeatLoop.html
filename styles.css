@@ -9,7 +9,14 @@ header {
     color: white;
     padding: 1em 0;
 }
-
+#about {
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+#contact {
+    background-color: #e0f7fa;
+    padding: 20px;
+}
 .nav-links {
     display: flex;
     justify-content: center;
