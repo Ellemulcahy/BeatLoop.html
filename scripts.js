@@ -1,9 +1,10 @@
 async function searchLyrics() {
-    const artist = document.getElementById('artist').value.trim();
-    const song = document.getElementById('song').value.trim();
-    const lyricsContainer = document.getElementById('lyrics-container');
+console.log('Search button clicked!');
+const artist = document.getElementById('artist').value.trim();
+const song = document.getElementById('song').value.trim();
+const lyricsContainer = document.getElementById('lyrics-container');
 
-    lyricsContainer.innerHTML = ''; // Clear previous results
+    lyricsContainer.innerHTML = '';
 
     if (!artist || !song) {
         lyricsContainer.innerHTML = '<p>Please enter both artist and song title.</p>';
