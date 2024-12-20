@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Discover and explore your favorite tracks with BeatLoop.">
-    <title>BeatLoop - Home</title>
+    <meta name="description" content="Discover and listen to your favorite tracks with our interactive music platform. Enjoy a seamless experience with personalized playlists and real-time music updates.">
+    <meta name="keywords" content="music, playlist, interactive, responsive design, API integration">
+    <meta name="author" content="Your Name">
+    <title>BeatLoop - Interactive Music Experience</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
@@ -14,9 +16,10 @@
         <nav>
             <div class="logo">BeatLoop</div>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#explore">Explore</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -24,27 +27,60 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <h1>Welcome to BeatLoop</h1>
-        <p>Your personalized music discovery platform.</p>
+        <p>Explore millions of songs, curated playlists, and personalized recommendations.</p>
         <button onclick="scrollToExplore()">Explore Now</button>
     </section>
 
     <!-- Explore Section -->
     <section id="explore">
-    <video autoplay muted loop style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
-        <source src="video/concert video.mp4" type="video/mp4">
-    </video>
-        <h2>Discover Music</h2>
+        <h2>Discover Music Lyrics</h2>
         <div class="search-bar">
-            <input type="text" id="search" placeholder="Search for songs, artists...">
-            <button onclick="searchMusic()">Search</button>
+            <input type="text" id="artist" placeholder="Enter artist name">
+            <input type="text" id="song" placeholder="Enter song title">
+            <button onclick="searchLyrics()">Search</button>
         </div>
-        <div id="music-container" class="music-grid"></div>
+        <div id="lyrics-container" class="lyrics-grid"></div>
     </section>
-
-    <!-- Footer -->
-    <footer>
+     <footer>
         <p>&copy; 2024 BeatLoop. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Scroll to Explore Section
+        function scrollToExplore() {
+            document.querySelector('#explore').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Fetch and Display Lyrics (Using Lyrics.ovh API)
+        async function searchLyrics() {
+            const artist = document.getElementById('artist').value;
+            const song = document.getElementById('song').value;
+            const lyricsContainer = document.getElementById('lyrics-container');
+
+            if (!artist || !song) {
+                lyricsContainer.innerHTML = '<p>Please enter both artist and song title.</p>';
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://api.lyrics.ovh/v1/${artist}/${song}`);
+                const data = await response.json();
+
+                if (data.lyrics) {
+                    lyricsContainer.innerHTML = `
+                        <div class="lyrics">
+                            <h3>${song} by ${artist}</h3>
+                            <pre>${data.lyrics}</pre>
+                        </div>
+                    `;
+                } else {
+                    lyricsContainer.innerHTML = '<p>Lyrics not found. Please try a different song.</p>';
+                }
+            } catch (error) {
+                console.error('Error fetching lyrics:', error);
+                lyricsContainer.innerHTML = '<p>Something went wrong. Please try again later.</p>';
+            }
+        }
+    </script>
 </body>
 </html>
-
