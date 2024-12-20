@@ -1,6 +1,7 @@
 document.getElementById("fetch-music").addEventListener("click", async () => {
-    const musicSection = document.getElementById("music-section");
-    const musicList = document.getElementById("music-list");
+    const clientId = '51005926db654a3b9ad28afa01128d1a';
+    const clientSecret = 'd920251ae7934b69ac73d6dce489b6e7';
+
 
     try {
         const response = await fetch("https://api.example.com/top-tracks"); // Replace with a real API
