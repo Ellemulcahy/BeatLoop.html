@@ -9,33 +9,7 @@ header {
     color: white;
     padding: 1em 0;
 }
-#about {
-    background-color: #f9f9f9;
-    padding: 20px;
-}
-#contact {
-    background-color: #e0f7fa;
-    padding: 20px;
-}
-#music-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    min-height: 200px; /* Optional: set a minimum height for the container */
-    align-items: center;
-}
 
-.track {
-    display: none; /* Tracks are hidden until populated */
-    flex: 0 1 calc(25% - 20px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-    background: #fff;
-    padding: 10px;
-    text-align: center;
-}
 .nav-links {
     display: flex;
     justify-content: center;
@@ -59,9 +33,22 @@ header {
     color: white;
 }
 
-#music-section {
+#music-container, #lyrics-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
     padding: 20px;
 }
+
+.track, .lyrics {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 
 .hidden {
     display: none;
