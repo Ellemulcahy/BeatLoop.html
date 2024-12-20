@@ -17,6 +17,25 @@ header {
     background-color: #e0f7fa;
     padding: 20px;
 }
+#music-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    min-height: 200px; /* Optional: set a minimum height for the container */
+    align-items: center;
+}
+
+.track {
+    display: none; /* Tracks are hidden until populated */
+    flex: 0 1 calc(25% - 20px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+    padding: 10px;
+    text-align: center;
+}
 .nav-links {
     display: flex;
     justify-content: center;
