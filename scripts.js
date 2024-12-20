@@ -3,21 +3,24 @@ async function searchLyrics() {
     const song = document.getElementById('song').value.trim();
     const lyricsContainer = document.getElementById('lyrics-container');
 
-    // Clear previous results
-    lyricsContainer.innerHTML = '';
+    lyricsContainer.innerHTML = ''; // Clear previous results
 
-    // Validate input
     if (!artist || !song) {
         lyricsContainer.innerHTML = '<p>Please enter both artist and song title.</p>';
         return;
     }
 
     try {
-        // Fetch lyrics from Lyrics.ovh API
-        const response = await fetch(`https://api.lyrics.ovh/v1/${artist}/${song}`);
-        const data = await response.json();
+        const response = await fetch(`https://api.lyrics.ovh/v1/${encodeURIComponent(artist)}/${encodeURIComponent(song)}`);
+        console.log('API Response:', response);
 
-        // Display lyrics if found
+        if (!response.ok) {
+            throw new Error(`API Error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Parsed Data:', data);
+
         if (data.lyrics) {
             lyricsContainer.innerHTML = `
                 <div class="lyrics">
