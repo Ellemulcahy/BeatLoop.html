@@ -16,10 +16,9 @@
         <nav>
             <div class="logo">BeatLoop</div>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#explore">Explore</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -46,12 +45,11 @@
     </footer>
 
     <script>
-        // Scroll to Explore Section
         function scrollToExplore() {
             document.querySelector('#explore').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Fetch and Display Lyrics (Using Lyrics.ovh API)
+    
         async function searchLyrics() {
             const artist = document.getElementById('artist').value;
             const song = document.getElementById('song').value;
